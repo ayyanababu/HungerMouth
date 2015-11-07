@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ResturantViewController: UITableViewController, UserDetailsProtocol {
+class ResturantViewController: UITableViewController {
     
+    
+    //MARK:- ConstantsAndVariables
     
     struct StoryBoardConstants {
         static var CELL_IDENTIFIER = "resturantcell"
@@ -17,16 +19,15 @@ class ResturantViewController: UITableViewController, UserDetailsProtocol {
     }
     
     
-    //lazy initialization of variable when ever it is used
     var resturantData : [ResturantsData] = ResturantsData.ResturantData()
     
     
     
     
     //MARK: ViewController LifeCycleMethods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //resturantData = ResturantsData.ResturantData()
     }
     
     
@@ -36,6 +37,8 @@ class ResturantViewController: UITableViewController, UserDetailsProtocol {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    
     
     // MARK: - UITableViewDataSoruce Methods
     
@@ -66,8 +69,6 @@ class ResturantViewController: UITableViewController, UserDetailsProtocol {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == StoryBoardConstants.MENU_SEGUE
         {
-            //let navController = segue.destinationViewController as? UINavigationController
-            //let menucontroller = navController?.topViewController as? MenuController
             
             let menucontroller = segue.destinationViewController as? MenuController
             if let cell = sender as? UITableViewCell,
@@ -86,11 +87,6 @@ class ResturantViewController: UITableViewController, UserDetailsProtocol {
     }
     
     
-    
-    //MARK: - UserDetailsProtocol
-    
-    func sucessFullyOrdered() {
-        
-    }
+  
     
 }

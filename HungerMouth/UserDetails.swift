@@ -15,6 +15,15 @@ protocol UserDetailsProtocol{
 }
 
 class UserDetails: UIViewController, UIAlertViewDelegate {
+    
+    
+    struct ScreenConstants{
+        static var MODE_OF_PAYMENT: String = "Mode Of Payment                  CashOnDelivery"
+        static var THANK_YOU: String = "Thank You"
+        static var OK = "Ok"
+        
+    }
+    
 
     @IBOutlet weak var userAddress: UITextView!
     @IBOutlet weak var totalAmount: UILabel!
@@ -26,12 +35,13 @@ class UserDetails: UIViewController, UIAlertViewDelegate {
     var sumOfAmmount: Int = 0
     
     
+    //MARK: LifeCycleMethods
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        print("total amouint \(sumOfAmmount)")
-       
         self.userAddress.layer.cornerRadius = 5.0
         self.userAddress.clipsToBounds = true
         
@@ -45,19 +55,19 @@ class UserDetails: UIViewController, UIAlertViewDelegate {
         self.modePayment.clipsToBounds = true
         
         
-        modePayment.text = "Mode Of Payment                  CashOnDelivery"
+        modePayment.text = ScreenConstants.MODE_OF_PAYMENT
         
         self.totalAmount.text = String(sumOfAmmount)
     
     }
     
-    
+    //MARK: ActionMethods
     
     
     @IBAction func payAction(sender: UIButton) {
         
-        let alert = UIAlertController(title: "Thank You", message: "Your Order Of Amount \(sumOfAmmount) is Sucessfull, And will be Delivered with in 45 mins", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: dismissAlertController))
+        let alert = UIAlertController(title: ScreenConstants.THANK_YOU, message: "Your Order Of Amount \(sumOfAmmount) is Sucessfull, And will be Delivered with in 45 mins", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: ScreenConstants.OK, style: UIAlertActionStyle.Default, handler: dismissAlertController))
         
         self.presentViewController(alert, animated: true, completion: nil)
         
@@ -66,7 +76,6 @@ class UserDetails: UIViewController, UIAlertViewDelegate {
     
     func dismissAlertController(alert: UIAlertAction){
         delegate?.sucessFullyOrdered()
-       // self.dismissViewControllerAnimated(false, completion: nil)
     }
 
     

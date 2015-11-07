@@ -18,7 +18,7 @@ class CheckOutCellView: UITableViewCell {
         self.menuName.text = chekoutData.menuName
         self.menuPrice.text = String(chekoutData.price)
         let stringQuantity = String(chekoutData.quantity)
-        let finalquantity = stringQuantity + "X"
+        let finalquantity = stringQuantity + "  X"
         self.quantitySum.text = finalquantity
         
     }

@@ -10,9 +10,15 @@ import UIKit
 
 class CheckOutController: UITableViewController, UserDetailsProtocol {
     
+    
+    //MARK:- ConstantsAndVariables
+    
     struct storyBoardConstatns{
         static var CELL_IDENTIFIER = "checkoutcell"
         static var PAY_SEGUE = "payoutsegue"
+        static var NAV_TITLE = "CheckOut"
+        static var TOTAL_PRICE = "Total Price"
+        static var RE_ORDER = "Reorder"
     }
     
     var actualCheckOutData: FinalDataToPay?
@@ -23,10 +29,12 @@ class CheckOutController: UITableViewController, UserDetailsProtocol {
     @IBOutlet weak var cancleOrder: UIButton!
 
     
+    //MARK: LifeCycleMethods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         calculateTotalPrice()
-        self.navigationItem.title = "CheckOut"
+        self.navigationItem.title = storyBoardConstatns.NAV_TITLE
         self.cancleOrder.setTitle(self.cancleOrderTitle, forState: .Normal)
 
         
@@ -35,6 +43,13 @@ class CheckOutController: UITableViewController, UserDetailsProtocol {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    
+    //MARK: HelperMethods
     
     func calculateTotalPrice(){
         let priceArray = actualCheckOutData?.checkOutData
@@ -54,15 +69,12 @@ class CheckOutController: UITableViewController, UserDetailsProtocol {
             finalData?.checkOutData.append(checkoutdata)
         }
         
-        let checkoutdata = CheckOutData(resturantName: "", address: "", menuName: "Total Price", quantity: totalQuantity, price: totalPrice)
+        let checkoutdata = CheckOutData(resturantName: "", address: "", menuName: storyBoardConstatns.TOTAL_PRICE, quantity: totalQuantity, price: totalPrice)
         self.totalAmount = totalPrice
         finalData?.checkOutData.append(checkoutdata)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
+ 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -90,6 +102,8 @@ class CheckOutController: UITableViewController, UserDetailsProtocol {
     }
     
     
+    //MARK: SegueMethods
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == storyBoardConstatns.PAY_SEGUE{
             let navController = segue.destinationViewController as? UINavigationController
@@ -108,7 +122,7 @@ class CheckOutController: UITableViewController, UserDetailsProtocol {
    //MARK: UserControllerDelegate
     func sucessFullyOrdered() {
         
-        self.cancleOrderTitle = "ReOrder"
+        self.cancleOrderTitle = storyBoardConstatns.RE_ORDER
 
         dismissViewControllerAnimated(false, completion: nil)
         

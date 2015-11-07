@@ -12,8 +12,14 @@ import UIKit
 class MenuController: UITableViewController {
     
     
-    struct StoryBoardSegue {
+    
+    //MARK:- ConstantsAndVariables
+    
+    struct ScreenConstants {
         static var CHECKOUT_SEGUE = "checkoutsegue"
+        static var CELL_IDENTIFIER = "menucell"
+        static var CANCLE = "Cancle"
+        static var NAV_TITLE = "Menu"
     }
     var resturantName: String?
     var resturantAddress: String?
@@ -25,9 +31,11 @@ class MenuController: UITableViewController {
     @IBOutlet weak var resturantImage: UIImageView!
 
     
+    //MARK:- ViewControllerLifeCycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Menu"
+        self.navigationItem.title = ScreenConstants.NAV_TITLE
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.grayColor()
         self.navigationItem.rightBarButtonItem?.enabled = false
         self.resturantNameLabel.text = resturantName
@@ -57,7 +65,7 @@ class MenuController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("menucell", forIndexPath: indexPath) as? MenuTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(ScreenConstants.CELL_IDENTIFIER, forIndexPath: indexPath) as? MenuTableViewCell
         
         let eachMenu = resturantMenu[indexPath.row]
         cell?.menuQuantity.text = "0"
@@ -85,9 +93,7 @@ class MenuController: UITableViewController {
                 self.finalData.checkOutData.append(checkoutdata)
                 
             }
-//            else{
-//                self.navigationItem.rightBarButtonItem?.tintColor = UIColor.grayColor()
-//            }
+
             
         }
         
@@ -96,12 +102,12 @@ class MenuController: UITableViewController {
     //MARK: SegueMethod
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == StoryBoardSegue.CHECKOUT_SEGUE
+        if segue.identifier == ScreenConstants.CHECKOUT_SEGUE
         {
             let navController = segue.destinationViewController as? UINavigationController
             let checkoutController = navController?.topViewController as? CheckOutController
             checkoutController?.actualCheckOutData = self.finalData
-            checkoutController?.cancleOrderTitle = "Cancle"
+            checkoutController?.cancleOrderTitle = ScreenConstants.CANCLE
             
         }
     }
