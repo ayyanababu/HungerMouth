@@ -9,7 +9,7 @@
 import UIKit
 
 
-class MenuController: UITableViewController {
+class MenuController: UITableViewController, UITextFieldDelegate {
     
     
     
@@ -112,6 +112,14 @@ class MenuController: UITableViewController {
         }
     }
     
+    
+    //MARK: TextFieldDelegates
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
     
     
 }
