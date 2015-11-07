@@ -8,20 +8,32 @@
 
 import UIKit
 
-class CheckOutController: UITableViewController {
+class CheckOutController: UITableViewController, UserDetailsProtocol {
     
     struct storyBoardConstatns{
         static var CELL_IDENTIFIER = "checkoutcell"
+        static var PAY_SEGUE = "payoutsegue"
     }
     
     var actualCheckOutData: FinalDataToPay?
     var finalData: FinalDataToPay?
+    var totalAmount: Int?
+    var cancleOrderTitle: String?
+    
+    @IBOutlet weak var cancleOrder: UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         calculateTotalPrice()
         self.navigationItem.title = "CheckOut"
+        self.cancleOrder.setTitle(self.cancleOrderTitle, forState: .Normal)
+
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func calculateTotalPrice(){
@@ -43,6 +55,7 @@ class CheckOutController: UITableViewController {
         }
         
         let checkoutdata = CheckOutData(resturantName: "", address: "", menuName: "Total Price", quantity: totalQuantity, price: totalPrice)
+        self.totalAmount = totalPrice
         finalData?.checkOutData.append(checkoutdata)
     }
 
@@ -76,6 +89,28 @@ class CheckOutController: UITableViewController {
         return cell!
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == storyBoardConstatns.PAY_SEGUE{
+            let navController = segue.destinationViewController as? UINavigationController
+            let summaryController = navController?.topViewController as? UserDetails
+            summaryController?.delegate = self
+            summaryController!.sumOfAmmount = self.totalAmount!
+        }
+    }
+    
+    @IBAction func cancleOrReorder(sender: UIButton) {
+        
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+    
 
-   
+   //MARK: UserControllerDelegate
+    func sucessFullyOrdered() {
+        
+        self.cancleOrderTitle = "ReOrder"
+
+        dismissViewControllerAnimated(false, completion: nil)
+        
+    }
 }

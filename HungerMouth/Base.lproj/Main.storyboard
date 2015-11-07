@@ -216,7 +216,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="DZn-JZ-x9s">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="Dga-Ee-aWr" kind="show" identifier="checkoutsegue" id="fNK-Xw-HxE"/>
+                                <segue destination="INV-o9-dh4" kind="presentation" identifier="checkoutsegue" id="fNK-Xw-HxE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -230,7 +230,7 @@
             </objects>
             <point key="canvasLocation" x="1928" y="260"/>
         </scene>
-        <!--Check Out Controller-->
+        <!--CheckOut-->
         <scene sceneID="M0c-o4-SHm">
             <objects>
                 <tableViewController id="Dga-Ee-aWr" customClass="CheckOutController" customModule="HungerMouth" customModuleProvider="target" sceneMemberID="viewController">
@@ -243,7 +243,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSE-qB-Zuj">
-                                    <rect key="frame" x="257" y="8" width="87" height="30"/>
+                                    <rect key="frame" x="167" y="8" width="87" height="30"/>
                                     <color key="backgroundColor" red="0.35294117650000001" green="0.73333333329999995" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="87" id="Esf-gR-Riq"/>
@@ -256,10 +256,25 @@
                                         <segue destination="h1P-e5-mcd" kind="presentation" identifier="payoutsegue" modalPresentationStyle="formSheet" id="fbm-xN-CKJ"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04G-nY-eR3">
+                                    <rect key="frame" x="311" y="8" width="87" height="30"/>
+                                    <color key="backgroundColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="87" id="OO6-ji-beD"/>
+                                    </constraints>
+                                    <state key="normal" title="ReOrder">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="cancleOrReorder:" destination="Dga-Ee-aWr" eventType="touchUpInside" id="iV6-EX-1nJ"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="ZSE-qB-Zuj" firstAttribute="centerX" secondItem="Ik3-Nt-Q8C" secondAttribute="centerX" id="dM0-Vf-4ER"/>
+                                <constraint firstItem="04G-nY-eR3" firstAttribute="baseline" secondItem="ZSE-qB-Zuj" secondAttribute="baseline" id="2ws-nv-82F"/>
+                                <constraint firstItem="04G-nY-eR3" firstAttribute="leading" secondItem="ZSE-qB-Zuj" secondAttribute="trailing" constant="57" id="XVF-if-nqd"/>
+                                <constraint firstItem="ZSE-qB-Zuj" firstAttribute="centerX" secondItem="Ik3-Nt-Q8C" secondAttribute="centerX" constant="-89.5" id="dM0-Vf-4ER"/>
                                 <constraint firstItem="ZSE-qB-Zuj" firstAttribute="top" secondItem="Ik3-Nt-Q8C" secondAttribute="topMargin" id="rD5-dv-Vl0"/>
                             </constraints>
                         </view>
@@ -323,11 +338,18 @@
                             <outlet property="delegate" destination="Dga-Ee-aWr" id="ikX-pp-UDn"/>
                         </connections>
                     </tableView>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem id="Kke-VJ-6AP"/>
+                        <barButtonItem id="BlT-Nq-0hf"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="CheckOut" id="ajg-qn-Zoa"/>
+                    <connections>
+                        <outlet property="cancleOrder" destination="04G-nY-eR3" id="Y8b-Ml-RWq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nXj-pF-R8u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2649" y="260"/>
+            <point key="canvasLocation" x="3461" y="260"/>
         </scene>
         <!--Thank You-->
         <scene sceneID="DPG-QE-p7m">
@@ -432,7 +454,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZH3-YY-bjF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4129" y="260"/>
+            <point key="canvasLocation" x="4941" y="260"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Iiz-wH-RTh">
@@ -478,7 +500,30 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLy-MI-awG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3317" y="260"/>
+            <point key="canvasLocation" x="4129" y="260"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9Yt-12-cUH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="INV-o9-dh4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m7c-r0-l9B">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.51372549020000002" green="0.5450980392" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.51372549020000002" green="0.5450980392" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.51372549020000002" green="0.5450980392" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Dga-Ee-aWr" kind="relationship" relationship="rootViewController" id="TQV-Mc-rOs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VES-fw-o5U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2649" y="260"/>
         </scene>
     </scenes>
     <resources>

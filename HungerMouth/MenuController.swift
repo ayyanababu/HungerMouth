@@ -36,6 +36,7 @@ class MenuController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableView.reloadData()
     
     }
     
@@ -59,6 +60,7 @@ class MenuController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("menucell", forIndexPath: indexPath) as? MenuTableViewCell
         
         let eachMenu = resturantMenu[indexPath.row]
+        cell?.menuQuantity.text = "0"
         
         cell?.configureUI(eachMenu)
         return cell!
@@ -82,9 +84,10 @@ class MenuController: UITableViewController {
                 self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
                 self.finalData.checkOutData.append(checkoutdata)
                 
-            }else{
-                self.navigationItem.rightBarButtonItem?.tintColor = UIColor.grayColor()
             }
+//            else{
+//                self.navigationItem.rightBarButtonItem?.tintColor = UIColor.grayColor()
+//            }
             
         }
         
@@ -95,8 +98,10 @@ class MenuController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == StoryBoardSegue.CHECKOUT_SEGUE
         {
-            let checkoutController = segue.destinationViewController as? CheckOutController
+            let navController = segue.destinationViewController as? UINavigationController
+            let checkoutController = navController?.topViewController as? CheckOutController
             checkoutController?.actualCheckOutData = self.finalData
+            checkoutController?.cancleOrderTitle = "Cancle"
             
         }
     }

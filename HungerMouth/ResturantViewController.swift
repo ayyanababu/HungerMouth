@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResturantViewController: UITableViewController {
+class ResturantViewController: UITableViewController, UserDetailsProtocol {
     
     
     struct StoryBoardConstants {
@@ -83,6 +83,14 @@ class ResturantViewController: UITableViewController {
             
             
         }
+    }
+    
+    
+    
+    //MARK: - UserDetailsProtocol
+    
+    func sucessFullyOrdered() {
+        
     }
     
 }

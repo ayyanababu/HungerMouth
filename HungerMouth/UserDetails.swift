@@ -8,17 +8,29 @@
 
 import UIKit
 
-class UserDetails: UIViewController {
+
+protocol UserDetailsProtocol{
+    
+    func sucessFullyOrdered()
+}
+
+class UserDetails: UIViewController, UIAlertViewDelegate {
 
     @IBOutlet weak var userAddress: UITextView!
     @IBOutlet weak var totalAmount: UILabel!
     @IBOutlet weak var modePayment: UILabel!
     @IBOutlet weak var totalpaymentLabelreadonly: UILabel!
     
+    var delegate: UserDetailsProtocol?
+    
+    var sumOfAmmount: Int = 0
+    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        print("total amouint \(sumOfAmmount)")
        
         self.userAddress.layer.cornerRadius = 5.0
         self.userAddress.clipsToBounds = true
@@ -35,6 +47,7 @@ class UserDetails: UIViewController {
         
         modePayment.text = "Mode Of Payment                  CashOnDelivery"
         
+        self.totalAmount.text = String(sumOfAmmount)
     
     }
     
@@ -43,10 +56,18 @@ class UserDetails: UIViewController {
     
     @IBAction func payAction(sender: UIButton) {
         
+        let alert = UIAlertController(title: "Thank You", message: "Your Order Of Amount \(sumOfAmmount) is Sucessfull, And will be Delivered with in 45 mins", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: dismissAlertController))
         
+        self.presentViewController(alert, animated: true, completion: nil)
         
     }
     
+    
+    func dismissAlertController(alert: UIAlertAction){
+        delegate?.sucessFullyOrdered()
+       // self.dismissViewControllerAnimated(false, completion: nil)
+    }
 
     
 
