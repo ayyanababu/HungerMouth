@@ -68,7 +68,7 @@ class MenuController: UITableViewController, UITextFieldDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier(ScreenConstants.CELL_IDENTIFIER, forIndexPath: indexPath) as? MenuTableViewCell
         
         let eachMenu = resturantMenu[indexPath.row]
-        cell?.menuQuantity.text = "0"
+        //cell?.menuQuantity.text = "0"
         
         cell?.configureUI(eachMenu)
         return cell!
