@@ -18,7 +18,7 @@ class MenuController: UITableViewController, UITextFieldDelegate {
     struct ScreenConstants {
         static var CHECKOUT_SEGUE = "checkoutsegue"
         static var CELL_IDENTIFIER = "menucell"
-        static var CANCLE = "Cancle"
+        static var CANCLE = "Cancel"
         static var NAV_TITLE = "Menu"
     }
     var resturantName: String?
@@ -124,7 +124,7 @@ class MenuController: UITableViewController, UITextFieldDelegate {
                 }
                 
                 
-                
+                cell.menuQuantity.text = "0"
                 
                 /*  self.navigationItem.rightBarButtonItem?.enabled = true
                 let checkoutdata = CheckOutData(resturantName: resturantname!, address: resturantaddress!, menuName: menuname!, quantity: quantity!, price: price!)
