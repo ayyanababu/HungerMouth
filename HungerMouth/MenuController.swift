@@ -92,9 +92,9 @@ class MenuController: UITableViewController, UITextFieldDelegate {
                 
                 var elementFound = false
                 self.navigationItem.rightBarButtonItem?.enabled = true
+                self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
                 if finalData.checkOutData.count == 0{
                     let checkoutdata = CheckOutData(resturantName: resturantname!, address: resturantaddress!, menuName: menuname!, quantity: quantity!, price: price!)
-                    self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
                     self.finalData.checkOutData.append(checkoutdata)
                     elementFound = true
                 }
@@ -120,7 +120,6 @@ class MenuController: UITableViewController, UITextFieldDelegate {
                 
                 if !elementFound{
                     let checkoutdata = CheckOutData(resturantName: resturantname!, address: resturantaddress!, menuName: menuname!, quantity: quantity!, price: price!)
-                    self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
                     self.finalData.checkOutData.append(checkoutdata)
                 }
                 

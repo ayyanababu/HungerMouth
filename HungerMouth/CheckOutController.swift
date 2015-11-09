@@ -115,8 +115,21 @@ class CheckOutController: UITableViewController, UserDetailsProtocol {
     
     @IBAction func cancleOrReorder(sender: UIButton) {
         
+        
+        let alert = UIAlertController(title: "Please Notify", message: "If you Click on Cancle all your previous orders will reseted to defaults sorry", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: dismissAlertController))
+        alert.addAction(UIAlertAction(title: "Cancle", style: UIAlertActionStyle.Default, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+    func dismissAlertController(alert: UIAlertAction){
         dismissViewControllerAnimated(false, completion: nil)
     }
+        
     
 
    //MARK: UserControllerDelegate
