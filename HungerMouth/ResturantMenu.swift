@@ -14,8 +14,9 @@ class ResturantMenu
     var menuName: String
     var menuImage: UIImage
     var menuPrice: Int
+    var menuQuantity: Int
     
-    init(menuName: String, menuImage: String, menuPrice: Int){
+    init(menuName: String, menuImage: String, menuPrice: Int, menuQuantity: Int){
         self.menuName = menuName
         if let img = UIImage(named: menuImage) {
             self.menuImage = img
@@ -23,5 +24,6 @@ class ResturantMenu
             self.menuImage = UIImage(named: "default")!
         }
         self.menuPrice = menuPrice
+        self.menuQuantity = menuQuantity
     }
 }
