@@ -29,23 +29,24 @@ class MenuController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var resturantNameLabel: UILabel!
     @IBOutlet weak var resturantImage: UIImageView!
-
+    
     
     //MARK:- ViewControllerLifeCycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = ScreenConstants.NAV_TITLE
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.grayColor()
-        self.navigationItem.rightBarButtonItem?.enabled = false
         self.resturantNameLabel.text = resturantName
         self.resturantImage.image = imageName
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.finalData.checkOutData.removeAll()
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.grayColor()
+        self.navigationItem.rightBarButtonItem?.enabled = false
         self.tableView.reloadData()
-    
+        
     }
     
     // MARK: - Table view data source
@@ -75,6 +76,8 @@ class MenuController: UITableViewController, UITextFieldDelegate {
     }
     
     
+    
+    //MARK: AddToCartMethod
     @IBAction func menuButton(sender: UIButton) {
         
         if let cell = sender.superview?.superview as? MenuTableViewCell{
@@ -87,13 +90,50 @@ class MenuController: UITableViewController, UITextFieldDelegate {
             
             if quantity != 0{
                 
+                var elementFound = false
                 self.navigationItem.rightBarButtonItem?.enabled = true
+                if finalData.checkOutData.count == 0{
+                    let checkoutdata = CheckOutData(resturantName: resturantname!, address: resturantaddress!, menuName: menuname!, quantity: quantity!, price: price!)
+                    self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
+                    self.finalData.checkOutData.append(checkoutdata)
+                    elementFound = true
+                }
+                
+                
+                
+                
+                if !elementFound {
+                    for var i=0;i < finalData.checkOutData.count ;i++ {
+                        let checkout = finalData.checkOutData[i]
+                        if (checkout.menuName == menuname) && (checkout.price == price){
+                            let newQuantity = checkout.quantity + quantity!
+                            let checkoutdata = CheckOutData(resturantName: resturantname!, address: resturantaddress!, menuName: menuname!, quantity: newQuantity, price: price!)
+                            
+                            self.finalData.checkOutData[i] = checkoutdata
+                            elementFound = true
+                            break
+                        }
+                        
+                    }
+                }
+                
+                
+                if !elementFound{
+                    let checkoutdata = CheckOutData(resturantName: resturantname!, address: resturantaddress!, menuName: menuname!, quantity: quantity!, price: price!)
+                    self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
+                    self.finalData.checkOutData.append(checkoutdata)
+                }
+                
+                
+                
+                
+                /*  self.navigationItem.rightBarButtonItem?.enabled = true
                 let checkoutdata = CheckOutData(resturantName: resturantname!, address: resturantaddress!, menuName: menuname!, quantity: quantity!, price: price!)
                 self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
-                self.finalData.checkOutData.append(checkoutdata)
+                self.finalData.checkOutData.append(checkoutdata)*/
                 
             }
-
+            
             
         }
         
